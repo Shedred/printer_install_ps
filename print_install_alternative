@@ -1,11 +1,11 @@
 $ip = "0.0.0.0"
-$portName = "TCPPort:0.0.0.0"
+$portName = "TCPPort:$ip"
 
 $portExists = Get-Printerport -Name $portname -ErrorAction SilentlyContinue
 
 if (-not $portExists) {
-  Add-PrinterPort -name $portName -PrinterHostAddress "0.0.0.0"
+  Add-PrinterPort -name $portName -PrinterHostAddress $ip
 }
 
-Add-printerport -Name "TCPPort:0.0.0.0" -PrinterHostAddress "0.0.0.0"
+Add-printerport -Name $portName -PrinterHostAddress $ip
 Add-PrinterDriver -Name "PCL6 Driver for Universal Print"
