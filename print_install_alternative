@@ -1,4 +1,5 @@
-$portName = "TCPPort:0.0.0.0" 
+$ip = "0.0.0.0"
+$portName = "TCPPort:0.0.0.0"
 
 $portExists = Get-Printerport -Name $portname -ErrorAction SilentlyContinue
 
