@@ -1,0 +1,15 @@
+$URL = "https://URL" #Driver URL goes here
+$Model = "MODEL_NAME" #Printer Model goes here
+$Path = "C:\temp\$Model\"
+$File = "C:\temp\$Model\$Model.zip"
+$IP = "0.0.0.0" #Printer IP goes here
+$Driver = "DRIVER NAME" #Printer Driver goes here
+ 
+mkdir $Path
+Invoke-WebRequest -Uri $URL -OutFile $File
+Expand-Archive $File -DestinationPath $Path
+Get-ChildItem $Path -Recurse -Filter "*inf" | ForEach-Object { PNPUtil.exe /add-driver $_.FullName /install }
+Add-PrinterDriver -Name $Driver 
+Add-PrinterPort -Name $IP -PrinterHostAddress $IP
+Add-Printer -Name $Model -DriverName $Driver -PortName $IP
+Remove-Item -Path $Path
