@@ -1,0 +1,5 @@
+::load_drivers
+drvload DRIVER_PATH
+
+::delay to see drivers and continue install
+ping 127.0.0.1 -n 6 >nul
